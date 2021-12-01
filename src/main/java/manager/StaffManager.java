@@ -74,14 +74,14 @@ public class StaffManager {
 		session.beginTransaction();
 		// Sauvegarde du staff créé, et on ne les enchaine PAS
 		session.save(staff2);
-		// On fait le comit et on close
+		// On fait le comit
 		session.getTransaction().commit();
 		// On ferme la connexion
 		session.close();
 	}
 	
 	/**
-	 * Permet de recevoir les infos d'un employé
+	 * Permet de recevoir le prénom et le nom d'un employé
 	 */
 	protected Staff read(int id) {
 		Session session = sessionFactory.openSession();
@@ -93,22 +93,44 @@ public class StaffManager {
 	}
 	
 	/**
-	 * Permet de recevoir les infos de tous les employés
+	 * Permet de recevoir tous les employés
 	 */
 	protected List<Staff> readAll() {
 		Session session = sessionFactory.openSession();
 		
-		Query query = session.createQuery("select nom, prenom from staff");
+		// requete HQL qui récupère tous les employés
+		Query query = session.createQuery("select s from Staff s");
+		// liste des staff récupérés
+		List<Staff> staffs = query.getResultList();
 		
+		session.close();
 		
-		return listeStaff;
+		return staffs;
 	}
 	
 	/**
 	 * Permet de mettre à jour un employé
 	 */
 	protected void update(int id, Staff newStaff) {
+		Staff staff = this.read(id);
 		
+		// si le nom est différent de null et que le nouveau nom est différent de l'ancien
+		if(newStaff.getNom() != null && staff.getNom() != newStaff.getNom()) {
+			// on attribut le nouveau nom
+			staff.setNom(newStaff.getNom());
+		}
+		if(newStaff.getPrenom() != null && staff.getPrenom() != newStaff.getPrenom()) {
+			staff.setPrenom(newStaff.getPrenom());
+		}
+		if(newStaff.getEmail() != null && staff.getEmail() != newStaff.getEmail()) {
+			staff.setEmail(newStaff.getEmail());
+		}
+		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(staff);
+		session.getTransaction().commit();
+		session.close();
 	}
 	
 	/**
@@ -134,6 +156,15 @@ public class StaffManager {
 		//manager.create(); // create fonctionne
 		//manager.read(1); // read fonctionne
 		
+		/**
+		 * TODO la méthode update
+		 */
+		Staff staff = new Staff();
+		
+//		List<Staff> staffs = manager.readAll(); // readAll fonctionne
+//		for (Staff staff : staffs) {
+//			System.out.println("L'employé n° "+staff.getId()+" s'appelle "+staff.getNom()+" "+staff.getPrenom() );
+//		}
 		
 		//Staff staff = manager.read(1); delete fonctionne
 		//manager.delete(staff);

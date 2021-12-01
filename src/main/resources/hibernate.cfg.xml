@@ -19,7 +19,7 @@
 		<!-- On log les requêtes SQL. On l'enlève pour la mise en prod -->
 		<property name="show_sql">true</property>
 		
-		<!-- On map (c'est à dire lier) les entités à la BDD. On en a qu'une, la classe book -->
+		<!-- On map (c'est à dire lier) les entités à la BDD. On en a qu'une, la classe Staff -->
 		<mapping class="entities.Staff"/>
 	
 	</session-factory>
