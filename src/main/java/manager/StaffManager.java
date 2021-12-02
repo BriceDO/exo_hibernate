@@ -42,6 +42,7 @@ public class StaffManager {
 	 * Permet de supprimer une session Hibernate
 	 */
 	protected void exit() {
+		System.out.println(sessionFactory);
 		sessionFactory.close();
 	}
 	
@@ -192,5 +193,6 @@ public class StaffManager {
 		
 		//Staff staff = manager.read(1); 
 		//manager.delete(staff);
+		manager.exit();
 	}
 }
