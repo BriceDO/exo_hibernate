@@ -100,7 +100,7 @@ public class StaffManager {
 		Session session = sessionFactory.openSession();
 		
 		// requete HQL qui récupère tous les employés
-		Query query = session.createQuery("select s from Staff s");
+		Query query = session.createQuery("from Staff");
 		// liste des staffs récupérés
 		List<Staff> staffs = query.getResultList();
 		
@@ -184,10 +184,10 @@ public class StaffManager {
 		
 						// readAll fonctionne
 		
-//		List<Staff> staffs = manager.readAll(); 
-//		for (Staff staff : staffs) {
-//			System.out.println("L'employé n° "+staff.getId()+" s'appelle "+staff.getNom()+" "+staff.getPrenom() );
-//		}
+		List<Staff> staffs = manager.readAll(); 
+		for (Staff staff : staffs) {
+			System.out.println("L'employé n° "+staff.getId()+" s'appelle "+staff.getNom()+" "+staff.getPrenom() );
+		}
 		
 						//delete fonctionne
 		
