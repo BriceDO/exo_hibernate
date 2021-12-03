@@ -21,6 +21,10 @@
 		
 		<!-- On map (c'est à dire lier) les entités à la BDD. On en a qu'une, la classe Staff -->
 		<mapping class="entities.Staff"/>
+		<mapping class="entities.Secteur"/>
+		<mapping class="entities.Filiale"/>
+		<mapping class="entities.Entreprise"/>
+		
 	
 	</session-factory>
 </hibernate-configuration>

@@ -2,6 +2,9 @@ package manager;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -99,14 +102,28 @@ public class StaffManager {
 	protected List<Staff> readAll() {
 		Session session = sessionFactory.openSession();
 		
+		// AVEC REQUETE HQL
+		
 		// requete HQL qui récupère tous les employés
-		Query query = session.createQuery("from Staff");
+		//Query query = session.createQuery("from Staff");
 		// liste des staffs récupérés
-		List<Staff> staffs = query.getResultList();
+		//List<Staff> staffs = query.getResultList();
+		
+		
+		// AVEC LE CRITERIA (C'est une requete) BUILDER
+		// Je récupère le criteria builder
+		CriteriaBuilder cb = session.getCriteriaBuilder();
+		// Je créé une requête via mon critéria pour taper sur ma table Staff
+		CriteriaQuery<Staff> cq = cb.createQuery(Staff.class);
+		// J'ajoute les filtres eventuels (from, where...)
+		Root<Staff> root = cq.from(Staff.class);
+		// J'insère mes filtres dans ma requête
+		CriteriaQuery<Staff> query = cq.select(root);
+		// Je balance ma requête dans ma session pour taper ma table et récup la liste de résultat
+		List<Staff> result = session.createQuery(query).getResultList();
 		
 		session.close();
-		
-		return staffs;
+		return result;
 	}
 	
 	/**
