@@ -18,7 +18,7 @@ public class StaffManager2 {
 
 	public static void main(String[] args) {
 		
-		//   DEBUT DE SESSION   //
+		//  DEBUT DE SESSION  //
 		
 		SessionFactory sessionFactory; 
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();   
@@ -82,9 +82,14 @@ public class StaffManager2 {
         
 		Set<Secteur> secteurs = new HashSet<Secteur>();
 		secteurs.add(secteur1);
+		
+		// Je rajoute ma liste de secteurs dans ma filiale
 		filiale1.setSecteurs(secteurs);
 		
+		// Je rajoute ma liste de filiales dans mon entreprise
         entreprise1.setFiliales(filiales);
+        	
+        // Je rajoute ma liste d'employée dans le secteur
 		secteur1.setStaffs(staffs);
 
         filiale1.addSecteur(secteur1);
