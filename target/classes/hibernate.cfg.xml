@@ -25,6 +25,5 @@
 		<mapping class="entities.Filiale"/>
 		<mapping class="entities.Entreprise"/>
 		
-	
 	</session-factory>
 </hibernate-configuration>
